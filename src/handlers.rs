@@ -1,12 +1,14 @@
-use crate::types::Screen;
-use crate::ui::{screen_content, screen_keyboard};
 use log::error;
-use teloxide::{ApiError, RequestError};
 use teloxide::{
+    ApiError, RequestError,
     prelude::*,
     types::{CallbackQuery, ChatId, InputFile, InputMedia, InputMediaPhoto, MessageId},
 };
 
+use crate::{
+    types::Screen,
+    ui::{screen_content, screen_keyboard},
+};
 
 // ---------------- ЛОГИКА СООБЩЕНИЙ ----------------
 pub async fn handle_message(bot: Bot, msg: Message) -> ResponseResult<()> {

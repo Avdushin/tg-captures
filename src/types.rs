@@ -14,10 +14,14 @@ pub enum Callbacks {
 
 impl std::fmt::Display for Callbacks {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", match self {
-            Callbacks::Start => "start",
-            Callbacks::Help => "help",
-            Callbacks::Menu => "menu",
-        })
+        write!(
+            f,
+            "{}",
+            match self {
+                Callbacks::Start => "start",
+                Callbacks::Help => "help",
+                Callbacks::Menu => "menu",
+            }
+        )
     }
 }

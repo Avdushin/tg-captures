@@ -2,11 +2,12 @@ mod handlers;
 mod types;
 mod ui;
 
-use crate::handlers::{handle_callback_query, handle_message};
 use dotenvy::dotenv;
 use env_logger;
 use log::info;
 use teloxide::{dptree, prelude::*};
+
+use crate::handlers::{handle_callback_query, handle_message};
 
 #[tokio::main]
 async fn main() {

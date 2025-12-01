@@ -1,0 +1,19 @@
+# Основные настройки
+max_width = 100          # Максимальная длина строки (после 100 символов - перенос)
+tab_spaces = 4           # 1 таб = 4 пробела
+use_try_shorthand = true # Разрешает `?` вместо `try!()`
+use_field_init_shorthand = true # Позволяет писать `Foo { x }` вместо `Foo { x: x }`
+format_code_in_doc_comments = true # Форматирует код в ``` внутри документации
+
+# Импорты
+imports_granularity = "Crate"          # Группирует импорты по крейтам
+group_imports = "StdExternalCrate"     # std, external, local - в таком порядке
+reorder_imports = true                 # Сортирует импорты алфавитно
+
+# Отступы и пробелы
+indent_style = "Block"     # Блочный стиль отступов (как в C/Java)
+trailing_comma = "Vertical" # Запятые в многострочных структурах всегда в конце
+
+# Match выражения
+match_arm_blocks = false      # Блоки в match не всегда в { }
+force_multiline_blocks = true # Многострочные блоки всегда с переносами
