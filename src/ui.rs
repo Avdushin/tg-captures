@@ -1,6 +1,6 @@
 use teloxide::types::{InlineKeyboardButton, InlineKeyboardMarkup};
 
-use crate::types::Screen;
+use crate::types::{Callbacks, Screen};
 
 // Текст и путь к картинке для каждого экрана
 pub fn screen_content(screen: Screen) -> (&'static str, &'static str) {
@@ -23,9 +23,9 @@ pub fn screen_content(screen: Screen) -> (&'static str, &'static str) {
 // Одна и та же навигация на всех экранах
 pub fn screen_keyboard() -> InlineKeyboardMarkup {
     let row = vec![
-        InlineKeyboardButton::callback("🏠 Старт", "start"),
-        InlineKeyboardButton::callback("❓ Help", "help"),
-        InlineKeyboardButton::callback("📋 Меню", "menu"),
+        InlineKeyboardButton::callback("🏠 Старт", Callbacks::Start.to_string()),
+        InlineKeyboardButton::callback("❓ Help", Callbacks::Help.to_string()),
+        InlineKeyboardButton::callback("📋 Меню", Callbacks::Menu.to_string()),
     ];
 
     InlineKeyboardMarkup::new(vec![row])
