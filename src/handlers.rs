@@ -1,10 +1,12 @@
 use crate::types::Screen;
 use crate::ui::{screen_content, screen_keyboard};
 use log::error;
+use teloxide::{ApiError, RequestError};
 use teloxide::{
     prelude::*,
     types::{CallbackQuery, ChatId, InputFile, InputMedia, InputMediaPhoto, MessageId},
 };
+
 
 // ---------------- ЛОГИКА СООБЩЕНИЙ ----------------
 pub async fn handle_message(bot: Bot, msg: Message) -> ResponseResult<()> {
@@ -66,16 +68,20 @@ async fn send_screen(bot: Bot, chat_id: ChatId, screen: Screen, message_id: Opti
         // Редактируем медиа и подпись в существующем сообщении
         let media = InputMedia::Photo(InputMediaPhoto::new(photo).caption(text.to_string()));
 
-        if let Err(_err) = bot
+        if let Err(err) = bot
             .edit_message_media(chat_id, msg_id, media)
             .reply_markup(keyboard)
             .await
         {
-            // eprint!("Error editing media: {err:?}");
-            return
+            // Если сообщение реально не изменилось - просто игнорируем
+            if let RequestError::Api(ApiError::MessageNotModified) = &err {
+                // debug!("Message not modified, nothing to update");
+            } else {
+                error!("Error editing media: {err:?}");
+            }
         }
     } else {
-        // Отправляем новое сообщение
+        // отправляем новое сообщение
         if let Err(err) = bot
             .send_photo(chat_id, photo)
             .caption(text.to_string())
