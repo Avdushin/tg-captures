@@ -66,12 +66,13 @@ async fn send_screen(bot: Bot, chat_id: ChatId, screen: Screen, message_id: Opti
         // Редактируем медиа и подпись в существующем сообщении
         let media = InputMedia::Photo(InputMediaPhoto::new(photo).caption(text.to_string()));
 
-        if let Err(err) = bot
+        if let Err(_err) = bot
             .edit_message_media(chat_id, msg_id, media)
             .reply_markup(keyboard)
             .await
         {
-            error!("Error editing media: {err:?}");
+            // eprint!("Error editing media: {err:?}");
+            return
         }
     } else {
         // Отправляем новое сообщение
